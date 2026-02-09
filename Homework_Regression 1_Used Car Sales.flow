@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "cells": [
+    {
+      "type": "cs",
+      "input": "assist"
+    },
+    {
+      "type": "cs",
+      "input": "importFiles"
+    },
+    {
+      "type": "cs",
+      "input": "importFiles [ \"/Users/pearlpatelll/Desktop/dataset_regression_car_prices.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "setupParse source_frames: [ \"nfs://Users/pearlpatelll/Desktop/dataset_regression_car_prices.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "parseFiles\n  source_frames: [\"nfs://Users/pearlpatelll/Desktop/dataset_regression_car_prices.csv\"]\n  destination_frame: \"dataset_regression_car_prices.hex\"\n  parse_type: \"CSV\"\n  separator: 44\n  number_columns: 9\n  single_quotes: false\n  column_names: [\"car_Name\",\"year\",\"selling_price\",\"present_price\",\"kms_driven\",\"fuel_type\",\"seller_type\",\"transmission\",\"owner\"]\n  column_types: [\"Enum\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Enum\",\"Enum\",\"Enum\",\"Numeric\"]\n  delete_on_done: true\n  check_header: 1\n  chunk_size: 4194304\n  escapechar: undefined"
+    },
+    {
+      "type": "cs",
+      "input": "getFrameSummary \"dataset_regression_car_prices.hex\""
+    },
+    {
+      "type": "cs",
+      "input": "assist runAutoML, training_frame: \"dataset_regression_car_prices.hex\""
+    },
+    {
+      "type": "cs",
+      "input": "runAutoML {\"build_control\":{\"distribution\":\"AUTO\",\"nfolds\":-1,\"balance_classes\":false,\"stopping_criteria\":{\"seed\":1234,\"max_models\":0,\"max_runtime_secs\":0,\"max_runtime_secs_per_model\":0,\"stopping_rounds\":3,\"stopping_metric\":\"AUTO\",\"stopping_tolerance\":-1},\"keep_cross_validation_predictions\":true,\"keep_cross_validation_models\":true,\"keep_cross_validation_fold_assignment\":false},\"input_spec\":{\"training_frame\":\"dataset_regression_car_prices.hex\",\"response_column\":\"selling_price\",\"ignored_columns\":[\"car_Name\"],\"sort_metric\":\"RMSE\"},\"build_models\":{\"exclude_algos\":[],\"exploitation_ratio\":-1,\"monotone_constraints\":[]}}, 'exec'"
+    },
+    {
+      "type": "cs",
+      "input": "getLeaderboard \"AutoML_2_20260207_73027@@selling_price\""
+    }
+  ]
+}
